@@ -1,7 +1,7 @@
-export default function HomePage() {
+export default function CatsPage() {
   return (
     <main className="flex flex-col justify-center items-center min-h-screen">
-      <p>Home Page</p>
+      <p>Cats Page</p>
     </main>
   );
 }
