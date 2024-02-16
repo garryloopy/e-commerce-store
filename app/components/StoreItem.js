@@ -1,7 +1,5 @@
 "use client";
 
-import dog from "@/public/pexels-kat-smith-551628.jpg";
-
 import Image from "next/image";
 
 import { IoHeart } from "react-icons/io5";
@@ -24,20 +22,40 @@ const QuantityButton = ({ children, isSelected, onClick }) => {
   );
 };
 
-export default function StoreItem() {
+import { useCart } from "../_utils/cart-context";
+
+export default function StoreItem({image, name}) {
   const [selectedQuantity, setSelectedQuantity] = useState(null);
+
+  const itemName = name;
+
+  const { addToCart } = useCart();
 
   const handleOnQuantityClick = (data) => {
     setSelectedQuantity(data);
   }
 
+  const handleOnAddToCart = () => {
+    if (selectedQuantity == null) return;
+
+
+    addToCart({
+      name: itemName,
+      quantity: selectedQuantity,
+      image: image
+    });
+
+
+    setSelectedQuantity(null);
+  }
+
   return (
     <div className="bg-gray-50 flex sm:flex-row flex-col sm:w-full w-fit items-center rounded-md border shadow-sm">
-      <Image src={dog} width={500} height={500} alt="Dog" />
+      <Image src={image} width={500} height={500} alt={name} />
       <div className="p-8 w-full flex flex-col gap-6 justify-between">
         <div className="flex flex-col gap-8">
           <div className="flex flex-row justify-between">
-            <p className="text-xl font-bold text-gray-700">Kat</p>
+            <p className="text-xl font-bold text-gray-700">{itemName}</p>
             <p className="text-lg font-semibold text-gray-500">In stock</p>
           </div>
 
@@ -59,7 +77,7 @@ export default function StoreItem() {
             <button className="border w-36 h-12 rounded-md hover:bg-gray-100 hover:shadow-md active:bg-gray-50">
               <p className="text-lg font-medium text-gray-700">Buy now</p>
             </button>
-            <button className="border w-36 h-12 rounded-md hover:bg-gray-100 hover:shadow-md active:bg-gray-50">
+            <button className="border w-36 h-12 rounded-md hover:bg-gray-100 hover:shadow-md active:bg-gray-50" onClick={handleOnAddToCart}>
               <p className="text-lg font-medium text-gray-700">Add to cart</p>
             </button>
           </div>

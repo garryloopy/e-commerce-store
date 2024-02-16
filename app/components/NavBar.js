@@ -7,6 +7,7 @@ import {
   IoPersonOutline,
   IoMenuSharp,
   IoClose,
+  IoHeartOutline
 } from "react-icons/io5";
 
 import Link from "next/link";
@@ -14,9 +15,14 @@ import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from 'next/navigation'
 
+
+import { useCart } from "../_utils/cart-context";
+
 export default function NavBar() {
   // Used for menu
   const [isMenuOpened, setIsMenuOpened] = useState(false);
+
+  const { cartLength } = useCart();
 
   const pathname = usePathname();
 
@@ -42,8 +48,17 @@ export default function NavBar() {
         </Link>
       </div>
       <div className="sm:flex hidden flex-row gap-10">
-        <Link href="/cart">
+        <Link href="/favorite">
+          <IoHeartOutline size="30" className={`font-semibold text-2xl ${pathname == "/favorite" ? "text-indigo-700" : "text-gray-600"}`}/>
+        </Link>
+
+        <Link href="/cart" className="relative">
           <IoCartOutline size="30" className={`font-semibold text-2xl ${pathname == "/cart" ? "text-indigo-700" : "text-gray-600"}`}/>
+          {cartLength > 0 && (
+            <div className="bg-indigo-800/90 w-5 h-5 absolute top-0 right-0 rounded-full flex items-center justify-center">
+            <p className="text-gray-50 text-xs">{cartLength}</p>
+          </div>
+          )}
         </Link>
         <Link href="/profile">
           <IoPersonOutline size="30" className={`font-semibold text-2xl ${pathname == "/profile" ? "text-indigo-700" : "text-gray-600"}`}/>
