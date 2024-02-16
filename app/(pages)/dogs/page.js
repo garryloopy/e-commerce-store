@@ -2,6 +2,11 @@ import StoreItem from "@/app/components/StoreItem";
 
 import PageLayout from "@/app/layouts/PageLayout";
 
+import kat_smith from "@/public/images/dogs/kat-smith.jpg";
+import helena_lopes from "@/public/images/dogs/helena-lopes.jpg";
+import dominika_roseclay from "@/public/images/dogs/dominika-roseclay.jpg";
+import ilargian_faus from "@/public/images/dogs/ilargian-faus.jpg";
+
 export default function DogsPage() {
   return (
     <PageLayout>
@@ -27,9 +32,9 @@ export default function DogsPage() {
       </section>
 
       <section className="flex flex-col gap-4">
-      <StoreItem />
-      <StoreItem />
-      <StoreItem />
+      <StoreItem image={kat_smith} name="Kat"/>
+      <StoreItem image={helena_lopes} name="Helena"/>
+      <StoreItem image={ilargian_faus} name="Ilargian"/>
       </section>
     </PageLayout>
   );
