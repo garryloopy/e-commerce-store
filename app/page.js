@@ -1,7 +1,14 @@
+"use client";
+
+import PageLayout from "./layouts/PageLayout";
+
 export default function HomePage() {
   return (
-    <main className="flex flex-col justify-center items-center min-h-screen">
-      <p>Home Page</p>
-    </main>
+
+    <PageLayout>
+      <p>Welcome to Virtual Pets</p>
+      <p>A store that allows you to purchase virtual pats.</p>
+    </PageLayout>
+
   );
 }
