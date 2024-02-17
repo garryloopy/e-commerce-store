@@ -1,27 +1,56 @@
 "use client";
- 
+
 import { useContext, createContext, useState } from "react";
 
 const CartContext = createContext();
 
-export const CartContextProvider = ({children}) => {
-    const [cart, setCart] = useState([]);
+const generateRandomId = () => {
+  const characters =
+    "qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM1234567890";
 
-    const cartLength = cart.length;
+  let randomId = "";
+  const ID_LENGTH = 10;
 
+  for (let i = 0; i < ID_LENGTH; i++) {
+    const currentChar = characters.charAt(
+      Math.random() * (characters.length - 1)
+    );
 
-    const addToCart = (item) => {
-        setCart([...cart, item]);
-    }
+    randomId += currentChar;
+  }
 
-    return (
-        <CartContext.Provider value={{ cartLength, cart, addToCart}}>
-            {children}
-        </CartContext.Provider>
-    )
-}
+  return randomId;
+};
 
+export const CartContextProvider = ({ children }) => {
+  const [cart, setCart] = useState([]);
+
+  const cartLength = cart.length;
+
+  const addToCart = (item) => {
+    const newCartItem = {
+      ...item,
+      id: generateRandomId(),
+    };
+
+    setCart([...cart, newCartItem]);
+  };
+
+  const removeItem = (itemToRemove) => {
+    const newCart = cart.filter(
+      (currentItem) => currentItem.id != itemToRemove.id
+    );
+
+    setCart(newCart);
+  };
+
+  return (
+    <CartContext.Provider value={{ cartLength, cart, addToCart, removeItem }}>
+      {children}
+    </CartContext.Provider>
+  );
+};
 
 export const useCart = () => {
-    return useContext(CartContext);
-}
+  return useContext(CartContext);
+};

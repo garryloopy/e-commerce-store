@@ -7,24 +7,35 @@ import { IoHeart } from "react-icons/io5";
 import { useState } from "react";
 
 const QuantityButton = ({ children, isSelected, onClick }) => {
-
   const handleOnClick = () => {
     if (onClick) {
       onClick(children);
     }
-  }
+  };
 
   return (
-    <button className={`w-10 h-10 border rounded-md ${isSelected ? "bg-indigo-600 hover:bg-indigo-700 border-0 shadow-sm active:bg-indigo-600" : ""} hover:bg-gray-100 hover:shadow-md active:bg-gray-50`}
-            onClick={handleOnClick}>
-      <p className={`text-base font-semibold ${isSelected ? "text-gray-50" : "text-gray-700"}`}>{children}</p>
+    <button
+      className={`w-10 h-10 border rounded-md ${
+        isSelected
+          ? "bg-indigo-600 hover:bg-indigo-700 border-0 shadow-sm active:bg-indigo-600"
+          : ""
+      } hover:bg-gray-100 hover:shadow-md active:bg-gray-50`}
+      onClick={handleOnClick}
+    >
+      <p
+        className={`text-base font-semibold ${
+          isSelected ? "text-gray-50" : "text-gray-700"
+        }`}
+      >
+        {children}
+      </p>
     </button>
   );
 };
 
 import { useCart } from "../_utils/cart-context";
 
-export default function StoreItem({image, name}) {
+export default function StoreItem({ image, name, onAddToCart }) {
   const [selectedQuantity, setSelectedQuantity] = useState(null);
 
   const itemName = name;
@@ -33,21 +44,23 @@ export default function StoreItem({image, name}) {
 
   const handleOnQuantityClick = (data) => {
     setSelectedQuantity(data);
-  }
+  };
 
   const handleOnAddToCart = () => {
     if (selectedQuantity == null) return;
 
-
-    addToCart({
+    const cartItem = {
       name: itemName,
       quantity: selectedQuantity,
-      image: image
-    });
+      image: image,
+    };
 
+    addToCart(cartItem);
 
-    setSelectedQuantity(null);
-  }
+    if (onAddToCart) {
+      onAddToCart(cartItem);
+    }
+  };
 
   return (
     <div className="bg-gray-50 flex sm:flex-row flex-col sm:w-full w-fit items-center rounded-md border shadow-sm">
@@ -62,12 +75,42 @@ export default function StoreItem({image, name}) {
           <div className="flex flex-col gap-4 border-b pb-4">
             <p className="text-lg font-semibold text-gray-700">Quantity:</p>
             <div className="flex flex-row gap-6">
-              <QuantityButton onClick={handleOnQuantityClick} isSelected={selectedQuantity == 1}>1</QuantityButton>
-              <QuantityButton onClick={handleOnQuantityClick} isSelected={selectedQuantity == 2}>2</QuantityButton>
-              <QuantityButton onClick={handleOnQuantityClick} isSelected={selectedQuantity == 3}>3</QuantityButton>
-              <QuantityButton onClick={handleOnQuantityClick} isSelected={selectedQuantity == 4}>4</QuantityButton>
-              <QuantityButton onClick={handleOnQuantityClick} isSelected={selectedQuantity == 5}>5</QuantityButton>
-              <QuantityButton onClick={handleOnQuantityClick} isSelected={selectedQuantity == 6}>6</QuantityButton>
+              <QuantityButton
+                onClick={handleOnQuantityClick}
+                isSelected={selectedQuantity == 1}
+              >
+                1
+              </QuantityButton>
+              <QuantityButton
+                onClick={handleOnQuantityClick}
+                isSelected={selectedQuantity == 2}
+              >
+                2
+              </QuantityButton>
+              <QuantityButton
+                onClick={handleOnQuantityClick}
+                isSelected={selectedQuantity == 3}
+              >
+                3
+              </QuantityButton>
+              <QuantityButton
+                onClick={handleOnQuantityClick}
+                isSelected={selectedQuantity == 4}
+              >
+                4
+              </QuantityButton>
+              <QuantityButton
+                onClick={handleOnQuantityClick}
+                isSelected={selectedQuantity == 5}
+              >
+                5
+              </QuantityButton>
+              <QuantityButton
+                onClick={handleOnQuantityClick}
+                isSelected={selectedQuantity == 6}
+              >
+                6
+              </QuantityButton>
             </div>
           </div>
         </div>
@@ -77,7 +120,10 @@ export default function StoreItem({image, name}) {
             <button className="border w-36 h-12 rounded-md hover:bg-gray-100 hover:shadow-md active:bg-gray-50">
               <p className="text-lg font-medium text-gray-700">Buy now</p>
             </button>
-            <button className="border w-36 h-12 rounded-md hover:bg-gray-100 hover:shadow-md active:bg-gray-50" onClick={handleOnAddToCart}>
+            <button
+              className="border w-36 h-12 rounded-md hover:bg-gray-100 hover:shadow-md active:bg-gray-50"
+              onClick={handleOnAddToCart}
+            >
               <p className="text-lg font-medium text-gray-700">Add to cart</p>
             </button>
           </div>

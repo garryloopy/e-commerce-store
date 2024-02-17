@@ -1,8 +1,10 @@
+import PageLayout from "@/app/layouts/PageLayout";
+
 export default function CatsPage() {
   return (
-    <main className="flex flex-col justify-center items-center min-h-screen">
+    <PageLayout>
       <p>Cats Page</p>
       <p>Still in construction... </p>
-    </main>
+    </PageLayout>
   );
 }
