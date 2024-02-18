@@ -8,15 +8,14 @@ import PageLayout from "@/app/layouts/PageLayout";
 
 import StoreModal from "@/app/components/StoreModal";
 
-import Link from "next/link";
+import Dogs from "@/app/data/dogs.json"
 
-import kat_smith from "@/public/images/dogs/kat-smith.jpg";
-import helena_lopes from "@/public/images/dogs/helena-lopes.jpg";
-import dominika_roseclay from "@/public/images/dogs/dominika-roseclay.jpg";
-import ilargian_faus from "@/public/images/dogs/ilargian-faus.jpg";
+import { useFavorite } from "@/app/_utils/favorite-context";
 
 export default function DogsPage() {
   const [showModal, setShowModal] = useState(false);
+
+  const { findFavorite } = useFavorite();
 
   const [modalObject, setModalObject] = useState({});
 
@@ -29,6 +28,8 @@ export default function DogsPage() {
     setModalObject({});
     setShowModal(false);
   };
+
+
 
   return (
     <PageLayout>
@@ -46,7 +47,7 @@ export default function DogsPage() {
         <div className="flex flex-row justify-between">
           <div className="flex flex-col justify-between">
             <p className="text-xl font-semibold text-gray-700">Results:</p>
-            <p className="text-md font-semibold text-gray-700">3</p>
+            <p className="text-md font-semibold text-gray-700">{Dogs.length}</p>
           </div>
 
           <div className="flex flex-col justify-center items-center">
@@ -59,22 +60,12 @@ export default function DogsPage() {
         </div>
       </section>
 
-      <section className="flex flex-col gap-12">
-        <StoreItem
-          image={kat_smith}
-          name="Kat"
-          onAddToCart={handleOnAddToCart}
-        />
-        <StoreItem
-          image={helena_lopes}
-          name="Helena"
-          onAddToCart={handleOnAddToCart}
-        />
-        <StoreItem
-          image={ilargian_faus}
-          name="Ilargian"
-          onAddToCart={handleOnAddToCart}
-        />
+      <section className="flex flex-col gap-12 items-center">
+        {
+          Dogs.map((dog) => (
+            <StoreItem storeItem={dog} onAddToCart={handleOnAddToCart} key={dog.id} isFavorite={findFavorite(dog)}/>
+          ))
+        }
       </section>
     </PageLayout>
   );

@@ -16,12 +16,14 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 
 import { useCart } from "../_utils/cart-context";
+import { useFavorite } from "../_utils/favorite-context";
 
 export default function NavBar() {
   // Used for menu
   const [isMenuOpened, setIsMenuOpened] = useState(false);
 
   const { cartLength } = useCart();
+  const { favoriteLength } = useFavorite();
 
   const pathname = usePathname();
 
@@ -34,7 +36,7 @@ export default function NavBar() {
   };
 
   return (
-    <header className="bg-gray-50/95 bg-opacity-95 w-full h-20 fixed top-0 left-0 sm:px-40 px-4 flex items-center sm:justify-between justify-end border shadow-sm">
+    <header className="bg-gray-50/95 bg-opacity-95 z-10 w-full h-20 fixed top-0 left-0 lg:px-40 md:px-20 px-4 flex items-center sm:justify-between justify-end border shadow-sm">
       <div className="sm:flex flex-row gap-10 hidden">
         <Link
           href="/"
@@ -62,13 +64,18 @@ export default function NavBar() {
         </Link>
       </div>
       <div className="sm:flex hidden flex-row gap-10">
-        <Link href="/favorite">
+        <Link href="/favorite" className="relative">
           <IoHeartOutline
             size="25"
             className={`font-semibold text-2xl ${
               pathname == "/favorite" ? "text-indigo-700" : "text-gray-600"
             }`}
           />
+          {favoriteLength > 0 && (
+            <div className="bg-indigo-800/75 bg-opacity-100 w-5 h-5 absolute top-0 right-0 rounded-full flex items-center justify-center">
+              <p className="text-gray-50 text-xs">{favoriteLength}</p>
+            </div>
+          )}
         </Link>
 
         <Link href="/cart" className="relative">

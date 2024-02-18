@@ -11,7 +11,7 @@ export default function StoreModal({ modalObject, onCloseModal }) {
 
   return (
     <motion.section
-      className="flex fixed top-0 left-0 bg-opacity-0 w-full h-full items-center justify-center backdrop-brightness-75"
+      className="flex fixed z-10 top-0 left-0 bg-opacity-0 w-full h-full items-center justify-center backdrop-brightness-75"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
     >

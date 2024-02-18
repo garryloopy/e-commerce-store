@@ -18,7 +18,7 @@ export default function CartItem({ itemObject }) {
   };
 
   return (
-    <div className="flex flex-row border rounded-md">
+    <div className="flex flex-shrink-0 flex-row border rounded-md overflow-auto">
       <Image src={itemObject.image} width={250} height={250} alt="Dog" />
       <div className="flex flex-col gap-4 p-4 w-full">
         <div className="flex flex-row justify-between">

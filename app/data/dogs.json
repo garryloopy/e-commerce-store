@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "name": "Kat",
+        "breed": null,
+        "availableQuantityOptions": [1, 2, 3, 4, 5, 6],
+        "imagePath": "/images/dogs/kat-smith.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Ilargian",
+        "breed": null,
+        "availableQuantityOptions": [1, 2, 3, 4, 5, 6],
+        "imagePath": "/images/dogs/ilargian-faus.jpg"
+    },
+    {
+        "id": 3,
+        "name": "Helena",
+        "breed": null,
+        "availableQuantityOptions": [1, 2, 3, 4, 5, 6],
+        "imagePath": "/images/dogs/helena-lopes.jpg"
+    },
+    {
+        "id": 4,
+        "name": "Dominika",
+        "breed": null,
+        "availableQuantityOptions": [1, 2, 3, 4, 5, 6],
+        "imagePath": "/images/dogs/dominika-roseclay.jpg"
+    }
+]
