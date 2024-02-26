@@ -1,0 +1,42 @@
+[
+    {
+        "id": 100,
+        "name": "Pixabay",
+        "description": null,
+        "breed": null,
+        "availableQuantityOptions": [1, 2, 3, 4, 5, 6],
+        "imagePath": "/images/cats/pixabay.jpg"
+    },
+    {
+        "id": 102,
+        "name": "Ihsan",
+        "description": null,
+        "breed": null,
+        "availableQuantityOptions": [1, 2, 3, 4, 5, 6],
+        "imagePath": "/images/cats/ihsan-adityawarman.jpg"
+    },
+    {
+        "id": 103,
+        "name": "Francesco",
+        "description": null,
+        "breed": null,
+        "availableQuantityOptions": [1, 2, 3, 4, 5, 6],
+        "imagePath": "/images/cats/francesco-ungaro.jpg"
+    },
+    {
+        "id": 104,
+        "name": "Serena",
+        "description": null,
+        "breed": null,
+        "availableQuantityOptions": [1, 2, 3, 4, 5, 6],
+        "imagePath": "/images/cats/serena-koi.jpg"
+    },
+    {
+        "id": 105,
+        "name": "Nihat",
+        "description": null,
+        "breed": null,
+        "availableQuantityOptions": [1, 2, 3, 4, 5, 6],
+        "imagePath": "/images/cats/nihat.jpg"
+    }
+]

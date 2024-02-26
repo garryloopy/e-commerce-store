@@ -2,20 +2,16 @@
 
 import { useState } from "react";
 
-import StoreItem from "@/app/components/StoreItem";
-
 import PageLayout from "@/app/layouts/PageLayout";
 
 import StoreModal from "@/app/components/StoreModal";
 
 import Dogs from "@/app/data/dogs.json"
 
-import { useFavorite } from "@/app/_utils/favorite-context";
+import StoreItemList from "@/app/components/StoreItemList";
 
 export default function DogsPage() {
   const [showModal, setShowModal] = useState(false);
-
-  const { findFavorite } = useFavorite();
 
   const [modalObject, setModalObject] = useState({});
 
@@ -28,8 +24,6 @@ export default function DogsPage() {
     setModalObject({});
     setShowModal(false);
   };
-
-
 
   return (
     <PageLayout>
@@ -60,13 +54,7 @@ export default function DogsPage() {
         </div>
       </section>
 
-      <section className="flex flex-col gap-12 items-center">
-        {
-          Dogs.map((dog) => (
-            <StoreItem storeItem={dog} onAddToCart={handleOnAddToCart} key={dog.id} isFavorite={findFavorite(dog)}/>
-          ))
-        }
-      </section>
+      <StoreItemList storeItems={Dogs} onAddToCart={handleOnAddToCart} />
     </PageLayout>
   );
 }

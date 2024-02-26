@@ -31,10 +31,18 @@ export const CartContextProvider = ({ children }) => {
     const newCartItem = {
       ...item,
       id: generateRandomId(),
+      cartQuantity: cartLength
     };
-
     setCart([...cart, newCartItem]);
   };
+
+  const checkout = () => {
+    const order = cart;
+
+    setCart([]);
+
+    return order;
+  }
 
   const removeItem = (itemToRemove) => {
     const newCart = cart.filter(
@@ -45,7 +53,7 @@ export const CartContextProvider = ({ children }) => {
   };
 
   return (
-    <CartContext.Provider value={{ cartLength, cart, addToCart, removeItem }}>
+    <CartContext.Provider value={{ cartLength, cart, addToCart, removeItem, checkout }}>
       {children}
     </CartContext.Provider>
   );

@@ -17,6 +17,10 @@ export default function CartItem({ itemObject }) {
     removeItem(itemObject);
   };
 
+  const handleOnQuantityChange = (e) => {
+    setSelectedQuantity(e.target.value);
+  };
+
   return (
     <div className="flex flex-shrink-0 flex-row border rounded-md overflow-auto">
       <Image src={itemObject.image} width={250} height={250} alt="Dog" />
@@ -36,7 +40,7 @@ export default function CartItem({ itemObject }) {
           <p className="text-gray-700 text-base font-semibold">Quantity:</p>
           <select
             value={selectedQuantity}
-            onChange={(e) => setSelectedQuantity(e.target.value)}
+            onChange={handleOnQuantityChange}
             className="px-4 py-1 border border-gray-500 rounded-md"
           >
             <option>1</option>

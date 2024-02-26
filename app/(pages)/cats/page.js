@@ -1,47 +1,60 @@
+"use client";
+
+import { useState } from "react";
+
 import PageLayout from "@/app/layouts/PageLayout";
 
-import Image from "next/image";
+import StoreModal from "@/app/components/StoreModal";
 
-import dogImg from "@/public/images/dogs/helena-lopes.jpg"
+import Cats from "@/app/data/cats.json"
 
-export default function CatsPage() {
+import StoreItemList from "@/app/components/StoreItemList";
+
+export default function DogsPage() {
+  const [showModal, setShowModal] = useState(false);
+
+  const [modalObject, setModalObject] = useState({});
+
+  const handleOnAddToCart = (item) => {
+    setModalObject(item);
+    setShowModal(true);
+  };
+
+  const handleOnCloseModal = () => {
+    setModalObject({});
+    setShowModal(false);
+  };
+
   return (
     <PageLayout>
-      <p>Cats Page</p>
-      <p>Still in construction... </p>
+      {Object.keys(modalObject).length > 0 && showModal && (
+        <StoreModal
+          modalObject={modalObject}
+          onCloseModal={handleOnCloseModal}
+        />
+      )}
+      <section className="flex flex-col gap-8 my-6">
+        <div>
+          <p className="text-4xl font-semibold text-gray-800">All Cats</p>
+        </div>
 
-      <div className="relative w-full h-64 flex flex-row">
-        <div className="relative bg-gray-500 w-1/3 h-full overflow-hidden">
-            <Image src={dogImg} alt="dog" layout="fill" objectFit="cover" />
-        </div>
-        <div className="relative bg-gray-700 w-2/3 h-full">
+        <div className="flex flex-row justify-between">
+          <div className="flex flex-col justify-between">
+            <p className="text-xl font-semibold text-gray-700">Results:</p>
+            <p className="text-md font-semibold text-gray-700">{Cats.length}</p>
+          </div>
 
+          <div className="flex flex-col justify-center items-center">
+            <p className="text-xl font-semibold text-gray-700">Sort by:</p>
+            <select className="px-4 py-2 bg-gray-50 border border-gray-500 rounded-md">
+              <option>Name</option>
+              <option>Breed</option>
+            </select>
+          </div>
         </div>
-      </div>
-      <div className="relative w-full h-64 flex flex-row">
-        <div className="relative bg-gray-500 w-1/3 h-full overflow-hidden">
-            <Image src={dogImg} alt="dog" layout="fill" objectFit="cover" />
-        </div>
-        <div className="relative bg-gray-700 w-2/3 h-full">
+      </section>
 
-        </div>
-      </div>
-      <div className="relative w-full h-64 flex flex-row">
-        <div className="relative bg-gray-500 w-1/3 h-full overflow-hidden">
-            <Image src={dogImg} alt="dog" layout="fill" objectFit="cover" />
-        </div>
-        <div className="relative bg-gray-700 w-2/3 h-full">
-
-        </div>
-      </div>
-      <div className="relative w-full h-64 flex flex-row">
-        <div className="relative bg-gray-500 w-1/3 h-full overflow-hidden">
-            <Image src={dogImg} alt="dog" layout="fill" objectFit="cover" />
-        </div>
-        <div className="relative bg-gray-700 w-2/3 h-full">
-
-        </div>
-      </div>
+      <StoreItemList storeItems={Cats} onAddToCart={handleOnAddToCart} />
     </PageLayout>
   );
 }
